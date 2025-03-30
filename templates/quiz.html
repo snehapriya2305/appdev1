@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ quiz.title }} - Quiz{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            {% if quiz %}
+                <h2 class="mb-3">Quiz for Chapter ID: {{ quiz.chapter_id }}</h2>
+                <p class="text-muted"><strong>Date:</strong> {{ quiz.date_of_quiz }}</p>
+                <p class="text-muted"><strong>Time Duration:</strong> {{ quiz.time_duration }} minutes</p>
+                <p class="text-muted"><strong>Total Questions:</strong> {{ questions|length }}</p>
+
+                {% if questions %}
+                    <form method="POST" action="{{ url_for('submit_quiz', quiz_id=quiz.id) }}">
+                        {% for question in questions %}
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ loop.index }}. {{ question.question_statement }}</h5>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="question_{{ question.id }}" value="{{ question.option1 }}" id="option1_{{ question.id }}" required>
+                                        <label class="form-check-label" for="option1_{{ question.id }}">
+                                            {{ question.option1 }}
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="question_{{ question.id }}" value="{{ question.option2 }}" id="option2_{{ question.id }}">
+                                        <label class="form-check-label" for="option2_{{ question.id }}">
+                                            {{ question.option2 }}
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="question_{{ question.id }}" value="{{ question.option3 }}" id="option3_{{ question.id }}">
+                                        <label class="form-check-label" for="option3_{{ question.id }}">
+                                            {{ question.option3 }}
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="question_{{ question.id }}" value="{{ question.option4 }}" id="option4_{{ question.id }}">
+                                        <label class="form-check-label" for="option4_{{ question.id }}">
+                                            {{ question.option4 }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary">Submit Quiz</button>
+                    </form>
+                {% else %}
+                    <p class="alert alert-warning">No questions available for this quiz.</p>
+                {% endif %}
+            {% else %}
+                <p class="alert alert-danger">Quiz not found.</p>
+            {% endif %}
+
+            <a href="{{ url_for('view_chapter_details', chapter_id=quiz.chapter_id) }}" class="btn btn-secondary mt-3">Back to Chapter</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

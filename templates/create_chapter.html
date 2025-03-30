@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Create Chapter{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Create New Chapter</h2>
+            <form method="POST">
+                <!-- Chapter Name -->
+                <div class="form-group">
+                    <label for="name">Chapter Name</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter chapter name" required>
+                </div>
+
+                <!-- Chapter Description -->
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" class="form-control" id="description" rows="3" placeholder="Enter chapter description" required></textarea>
+                </div>
+
+                <!-- Hidden Input for Subject ID -->
+                <input type="hidden" name="subject_id" value="{{ subject_id }}">
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary">Create Chapter</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

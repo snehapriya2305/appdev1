@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Chapter{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Edit Chapter</h2>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="name">Chapter Name</label>
+                    <input type="text" name="name" class="form-control" id="name" value="{{ chapter.name }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" class="form-control" id="description" rows="3" required>{{ chapter.description }}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">Update Chapter</button>
+                <a href="{{ url_for('manage_chapter', chapter_id=chapter.id) }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

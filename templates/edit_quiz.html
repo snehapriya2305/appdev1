@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Quiz{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Edit Quiz</h2>
+            <form method="POST" action="{{ url_for('edit_quiz', quiz_id=quiz.id) }}">
+                <div class="form-group">
+                    <label for="date_of_quiz">Quiz Date</label>
+                    <input type="date" class="form-control" id="date_of_quiz" name="date_of_quiz" value="{{ quiz.date_of_quiz }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time_duration">Time Duration (minutes)</label>
+                    <input type="number" class="form-control" id="time_duration" name="time_duration" value="{{ quiz.time_duration }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="remarks">Remarks</label>
+                    <textarea class="form-control" id="remarks" name="remarks" rows="3">{{ quiz.remarks }}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <a href="{{ url_for('manage_quiz', quiz_id=quiz.id) }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

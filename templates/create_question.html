@@ -1,0 +1,59 @@
+#create question template
+{% extends "base.html" %}
+
+{% block title %}Create Question{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Create Question</h2>
+            <form method="POST">
+                <div class="form-group
+                ">
+                    <label for="question">Question</label>
+                    <textarea name="question" class="form-control" id="question" rows="3" placeholder="Enter question" required></textarea>
+                </div>
+
+                <div class="form-group
+                ">
+                    <label for="option_a">Option A</label>
+                    <input type="text" name="option_a" class="form-control" id="option_a" placeholder="Enter option A" required>
+                </div>
+
+                <div class="form-group
+                ">
+                    <label for="option_b">Option B</label>
+                    <input type="text" name="option_b" class="form-control" id="option_b" placeholder="Enter option B" required>
+                </div>
+
+                <div class="form-group
+                ">
+                    <label for="option_c">Option C</label>
+                    <input type="text" name="option_c" class="form-control" id="option_c" placeholder="Enter option C" required>
+                </div>
+
+                <div class="form-group
+                ">
+                    <label for="option_d">Option D</label>
+                    <input type="text" name="option_d" class="form-control" id="option_d" placeholder="Enter option D" required>
+                </div>
+
+                <div class="form-group
+                ">
+                    <label for="correct_option">Correct Option</label>
+                    <select name="correct_option" class="form-control" id="correct_option" required>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+
+                <input type="hidden" name="quiz_id" value="{{ quiz_id }}">
+                <button type="submit" class="btn btn-primary">Create Question</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

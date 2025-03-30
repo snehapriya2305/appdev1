@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Admin Dashboard</h2>
+            <p>Welcome, Admin!</p>
+
+            <!-- Button to create a new subject -->
+            <a href="{{ url_for('create_subject') }}" class="btn btn-primary mb-3">Create New Subject</a>
+
+            <!-- Button to manage users -->
+            <a href="{{ url_for('manage_users') }}" class="btn btn-warning mb-3">Manage Users</a>
+
+            <!-- List of existing subjects -->
+            <h3>Existing Subjects</h3>
+            <ul class="list-group">
+                {% for subject in subjects %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ subject.name }} - {{ subject.description }}
+                        <a href="{{ url_for('manage_subject', subject_id=subject.id) }}" class="btn btn-sm btn-info">Manage</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Button to go to the Login Page -->
+            <a href="{{ url_for('index') }}" class="btn btn-danger mt-4">Go to Login Page</a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

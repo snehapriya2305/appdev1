@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Manage Users</h2>
+            <p>Here you can manage all registered users.</p>
+
+            {% if users %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Qualification</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.qualification }}</td>
+                            <td>
+                                <!-- Manage User's Quiz Button -->
+                                <a href="{{ url_for('manage_user_quiz', user_id=user.id) }}" class="btn btn-info btn-sm">Manage</a>
+
+                                <!-- Delete User Button -->
+                                <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" class="d-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="alert alert-warning">No users found.</p>
+            {% endif %}
+
+            <!-- Return to Dashboard Button -->
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary mt-3">Return to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

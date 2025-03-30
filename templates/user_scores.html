@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Your Quiz Scores{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2>Your Quiz Scores</h2>
+
+    {% if scores %}
+        <table class="table table-bordered mt-3">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Chapter Name</th>
+                    <th>Max Marks</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score, quiz, chapter, max_marks in scores %}
+                <tr>
+                    <td>{{ chapter.name }}</td>
+                    <td>{{ max_marks }}</td>
+                    <td>{{ score.total_scored }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="alert alert-warning">You haven't taken any quizzes yet.</p>
+    {% endif %}
+
+    <!-- Return to Dashboard Button -->
+    <a href="{{ url_for('user_dashboard') }}" class="btn btn-secondary">Return to Dashboard</a>
+</div>
+{% endblock %}

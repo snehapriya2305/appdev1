@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Manage User Quiz{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Manage User Quiz Scores</h2>
+    <p>User: <strong>{{ user.username }}</strong></p>
+
+    <form method="POST">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Chapter Name</th>
+                    <th>Max Marks</th>
+                    <th>Score</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score, quiz, chapter, max_marks in scores %}
+                <tr>
+                    <td>{{ chapter.name }}</td>  
+                    <td>{{ max_marks }}</td>  <!-- Show Max Marks dynamically -->
+                    <td>
+                        <input type="number" name="score_{{ score.id }}" 
+                               value="{{ score.total_scored }}" 
+                               class="form-control"
+                               min="0" max="{{ max_marks }}">
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-success">Update</button>
+
+                        <!-- Delete Button -->
+                        <button type="submit" name="delete_score" value="{{ score.id }}" 
+                                class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this score?');">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+
+    <!-- Return to Dashboard Button -->
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Return to Dashboard</a>
+</div>
+{% endblock %}
+
+
+

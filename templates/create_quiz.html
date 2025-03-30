@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Create Quiz{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Create New Quiz</h2>
+            <form method="POST">
+                <!-- Quiz Date -->
+                <div class="form-group">
+                    <label for="date_of_quiz">Quiz Date</label>
+                    <input type="date" name="date_of_quiz" class="form-control" id="date_of_quiz" required>
+                </div>
+
+                <!-- Time Duration -->
+                <div class="form-group">
+                    <label for="time_duration">Time Duration (in minutes)</label>
+                    <input type="number" name="time_duration" class="form-control" id="time_duration" placeholder="Enter time duration" required>
+                </div>
+
+                <!-- Remarks -->
+                <div class="form-group">
+                    <label for="remarks">Remarks</label>
+                    <textarea name="remarks" class="form-control" id="remarks" rows="3" placeholder="Enter remarks"></textarea>
+                </div>
+
+                <!-- Hidden Input for Chapter ID -->
+                <input type="hidden" name="chapter_id" value="{{ chapter_id }}">
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary">Create Quiz</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
